@@ -25,22 +25,24 @@ namespace impl
 
 	void force_write( void* address, void* data, size_t size )
 	{
-		auto current_cr0 = __readcr0( );
+		const std::unique_ptr<MDL, decltype( &IoFreeMdl )> mdl( IoAllocateMdl( address, static_cast< ULONG >( size ), FALSE, FALSE, nullptr ), &IoFreeMdl );
 
-		static const auto original_cr0 = current_cr0;
+		if ( !mdl )
+			return;
 
-		/* flip bit 16 (write protect) */
-		current_cr0 &= ~( 1u << 16u );
+		MmProbeAndLockPages( mdl.get( ), KernelMode, IoReadAccess );
 
-		KIRQL previous_irql_level = 0;
-		KeRaiseIrql( DISPATCH_LEVEL, &previous_irql_level );
+		const auto mapped_page = MmMapLockedPagesSpecifyCache( mdl.get( ), KernelMode, MmNonCached, nullptr, FALSE, NormalPagePriority );
 
-		__writecr0( current_cr0 );
+		if ( !mapped_page )
+			return;
 
-		memcpy( address, data, size );
+		if ( !NT_SUCCESS( MmProtectMdlSystemAddress( mdl.get( ), PAGE_EXECUTE_READWRITE ) ) )
+			return;
 
-		__writecr0( original_cr0 );
+		memcpy( mapped_page, data, size );
 
-		KeLowerIrql( previous_irql_level );
+		MmUnmapLockedPages( mapped_page, mdl.get( ) );
+		MmUnlockPages( mdl.get( ) );
 	}
 }
