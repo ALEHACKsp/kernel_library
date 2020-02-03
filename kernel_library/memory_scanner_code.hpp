@@ -3,7 +3,8 @@
 
 namespace impl
 {
-	uint8_t* scan_for_pattern_code( const nt::rtl_module_info* module, const char* signature, const char* signature_mask )
+	template <size_t N>
+	uint8_t* scan_for_pattern_code( const nt::rtl_module_info* module, const char( &signature )[ N ], const char( &signature_mask )[ N ] )
 	{
 		if ( !module )
 			return nullptr;
@@ -12,7 +13,7 @@ namespace impl
 		const auto module_size = module_start + module->image_size;
 
 		/* iterate the entire module */
-		for ( auto segment = module_start; segment < module_size; segment++ )
+		for ( auto segment = module_start; segment < module_size - N; segment++ )
 		{
 			if ( [ & ]( const uint8_t* bytes ) -> bool
 				 {
