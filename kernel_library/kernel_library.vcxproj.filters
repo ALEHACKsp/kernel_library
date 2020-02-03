@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="header\utils">
+      <UniqueIdentifier>{b23d393c-d191-4e8f-9451-7185cbec2bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header\utils\modules">
+      <UniqueIdentifier>{f3a7920f-143a-4082-a742-6172afbd169a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header\utils\memory">
+      <UniqueIdentifier>{89424780-d620-4682-81a1-3bc9b26a278c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header\utils\general">
+      <UniqueIdentifier>{87e7bdad-3244-4fef-ba9e-ad6d2b6bf5b7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="raii_defs.hpp">
+      <Filter>header\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="module_getter.hpp">
+      <Filter>header\utils\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="module_defs.hpp">
+      <Filter>header\utils\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="section_getter.hpp">
+      <Filter>header\utils\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="export_getter.hpp">
+      <Filter>header\utils\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="memory_scanner_code.hpp">
+      <Filter>header\utils\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory_scanner_ida.hpp">
+      <Filter>header\utils\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="process_getter.hpp">
+      <Filter>header\utils\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="memory_utility.hpp">
+      <Filter>header\utils\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="thread_getter.hpp">
+      <Filter>header\utils\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="general_util.hpp">
+      <Filter>header\utils\general</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
