@@ -12,6 +12,7 @@ namespace impl
 
 	using threads_array_t = std::pair<threads_t*, uint32_t>;
 
+	/* NOTE: YOU HAVE TO FREE THE POOL YOURSELF! */
 	threads_array_t nt_find_threads( uint64_t process_id )
 	{
 		PEPROCESS process_out{};
