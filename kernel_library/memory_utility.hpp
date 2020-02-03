@@ -32,7 +32,7 @@ namespace impl
 
 		MmProbeAndLockPages( mdl.get( ), KernelMode, IoReadAccess );
 
-		const auto mapped_page = MmMapLockedPagesSpecifyCache( mdl.get( ), KernelMode, MmNonCached, nullptr, FALSE, NormalPagePriority );
+		const auto mapped_page = MmMapLockedPagesSpecifyCache( mdl.get( ), KernelMode, MmCached, nullptr, FALSE, NormalPagePriority );
 
 		if ( !mapped_page )
 			return;
