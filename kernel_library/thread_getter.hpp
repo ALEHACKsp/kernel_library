@@ -6,7 +6,7 @@ namespace impl
 {
 	struct threads_t
 	{
-		std::uint64_t start_address;
+		uint64_t start_address;
 		HANDLE thread_id;
 	};
 
@@ -54,7 +54,7 @@ namespace impl
 		while ( previous_thread )
 		{
 			/* these differ per windows versions. this is for 1909. */
-			temporary_buffer[ thread_count ].start_address = *reinterpret_cast< std::uint64_t* >( std::uintptr_t( previous_thread ) + 0x628 );
+			temporary_buffer[ thread_count ].start_address = *reinterpret_cast< uint64_t* >( std::uintptr_t( previous_thread ) + 0x628 );
 			temporary_buffer[ thread_count ].thread_id = ( *reinterpret_cast< CLIENT_ID* >( std::uintptr_t( previous_thread ) + 0x648 ) ).UniqueThread;
 
 			previous_thread = PsGetNextProcessThread( process.get( ), previous_thread );
