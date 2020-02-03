@@ -33,7 +33,7 @@ namespace impl
 
 			static const auto kernel_module_start = kernel_module_data->image_base;
 
-			static const auto export_directory = reinterpret_cast< nt::image_export_dir* >( kernel_module_start + reinterpret_cast< nt::image_nt_headers* >( kernel_module_start + 0x3c )->optional_header.data_directories[ 0 ].virtual_address );
+			static const auto export_directory = reinterpret_cast< nt::image_export_dir* >( kernel_module_start + reinterpret_cast< nt::image_nt_headers* >( kernel_module_start + *reinterpret_cast< uint32_t* >( kernel_module_start + 0x3c ) )->optional_header.data_directories[ 0 ].virtual_address );
 
 			static const auto address_of_functions = reinterpret_cast< uint32_t* >( kernel_module_start + export_directory->address_of_fn );
 			static const auto address_of_names = reinterpret_cast< uint32_t* >( kernel_module_start + export_directory->address_of_name );
