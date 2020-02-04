@@ -12,13 +12,8 @@ namespace impl
 
 		if ( !relative_sig )
 			return nullptr;
-
-		static const auto call_instruction = resolve_jxx( relative_sig );
-
-		if ( !call_instruction )
-			return nullptr;
-
-		static const auto PsGetNextProcess = resolve_call< PEPROCESS( * )( PEPROCESS )>( call_instruction );
+		
+		static const auto PsGetNextProcess = resolve_call< PEPROCESS( * )( PEPROCESS )>( resolve_jxx( relative_sig ) );
 
 		if ( !PsGetNextProcess )
 			return nullptr;
