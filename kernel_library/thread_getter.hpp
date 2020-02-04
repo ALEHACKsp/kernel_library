@@ -31,13 +31,8 @@ namespace impl
 
 		if ( !relative_sig )
 			return {};
-
-		static const auto call_instruction = resolve_jxx( relative_sig );
-
-		if ( !call_instruction )
-			return {};
-
-		static const auto PsGetNextProcessThread = resolve_call< PETHREAD( * )( PEPROCESS, PETHREAD )>( call_instruction );
+		
+		static const auto PsGetNextProcessThread = resolve_call< PETHREAD( * )( PEPROCESS, PETHREAD )>( resolve_jxx( relative_sig ) );
 
 		if ( !PsGetNextProcessThread )
 			return {};
