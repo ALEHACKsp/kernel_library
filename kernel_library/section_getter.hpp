@@ -11,7 +11,7 @@ namespace impl
 			return nullptr;
 
 		/* get the file (nt) header, stored at image base + e_lfanew, usually fixed at 0x3c*/
-		const auto image_file_header = reinterpret_cast< nt::image_nt_headers* >( kernel_module_start + *reinterpret_cast< uint32_t* >( kernel_module_start + 0x3c ) );
+		const auto image_file_header = reinterpret_cast< nt::image_nt_headers* >( module_info->image_base + *reinterpret_cast< uint32_t* >( kernel_module_start + 0x3c ) );
 		const auto image_section_header = reinterpret_cast< nt::image_section_header* >( image_file_header + 1 );
 
 		for ( auto i = 0; i < image_file_header->file_header.number_of_sections; i++ )
